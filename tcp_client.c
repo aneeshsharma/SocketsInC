@@ -8,7 +8,7 @@
 
 int main()
 {
-    int sock = 0, valread;
+    int sock = 0, recv_len;
     struct sockaddr_in server_address;
     char *message = "A message from client\0";
     char buffer[1024] = {0};
@@ -38,7 +38,7 @@ int main()
 
     send(sock, message, strlen(message), 0);
     printf("Client Message sent!\n");
-    valread = read(sock, buffer, 1024);
+    recv_len = read(sock, buffer, 1024);
     printf("Message received - %s\n", buffer);
     return 0;
 }

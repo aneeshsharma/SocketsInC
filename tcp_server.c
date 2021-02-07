@@ -9,7 +9,7 @@
 
 int main()
 {
-    int server_fd, conn_socket, valread;
+    int server_fd, conn_socket, recv_len;
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
@@ -50,7 +50,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    valread = read(conn_socket, buffer, 1024);
+    recv_len = read(conn_socket, buffer, 1024);
     printf("Message received - %s\n", buffer);
     send(conn_socket, message, strlen(message), 0);
     printf("Server Message sent!\n");
