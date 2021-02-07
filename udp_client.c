@@ -34,7 +34,7 @@ int main()
 
     sendto(sock_fd, (const char *)message, strlen(message), MSG_CONFIRM, (const struct sockaddr *)&server_address, sizeof(server_address));
 
-    printf("Hello message sent.\n");
+    printf("Client message sent!\n");
 
     recv_len = recvfrom(sock_fd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&server_address, &len);
 

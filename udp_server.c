@@ -51,7 +51,7 @@ int main()
 
         sendto(sock_fd, (const char *)message, strlen(message), MSG_CONFIRM, (const struct sockaddr *)&client_address, len);
 
-        printf("Message sent!\n");
+        printf("Server response sent!\n");
     }
     return 0;
 }
