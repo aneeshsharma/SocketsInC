@@ -37,19 +37,19 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    int addr_len, recv_len;
+    int len, recv_len;
 
-    addr_len = sizeof(client_address);
+    len = sizeof(client_address);
 
     while (1)
     {
-        recv_len = recvfrom(sock_fd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&client_address, &addr_len);
+        recv_len = recvfrom(sock_fd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&client_address, &len);
 
         buffer[recv_len] = '\0';
 
         printf("Message received: %s\n", buffer);
 
-        sendto(sock_fd, (const char *)message, strlen(message), MSG_CONFIRM, (const struct sockaddr *)&client_address, addr_len);
+        sendto(sock_fd, (const char *)message, strlen(message), MSG_CONFIRM, (const struct sockaddr *)&client_address, len);
 
         printf("Message sent!\n");
     }

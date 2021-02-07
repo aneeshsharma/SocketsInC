@@ -44,15 +44,21 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    if ((conn_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
+    while (1)
     {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }
+        if ((conn_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
+        {
+            perror("accept");
+            exit(EXIT_FAILURE);
+        }
 
-    recv_len = read(conn_socket, buffer, 1024);
-    printf("Message received - %s\n", buffer);
-    send(conn_socket, message, strlen(message), 0);
-    printf("Server Message sent!\n");
+        recv_len = read(conn_socket, buffer, 1024);
+        buffer[recv_len] = '\0';
+        printf("Message received - %s\n", buffer);
+        send(conn_socket, message, strlen(message), 0);
+        printf("Server Message sent!\n");
+
+        close(conn_socket);
+    }
     return 0;
 }
