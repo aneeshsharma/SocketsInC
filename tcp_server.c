@@ -13,7 +13,7 @@ int main()
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
-    char *message = "A message from server";
+    char message[256];
     char buffer[1024] = {0};
 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -55,6 +55,9 @@ int main()
         recv_len = read(conn_socket, buffer, 1024);
         buffer[recv_len] = '\0';
         printf("Message received - %s\n", buffer);
+
+        printf("Enter reply -");
+        scanf("%[^\n]s", message);
         send(conn_socket, message, strlen(message), 0);
         printf("Server Message sent!\n");
 

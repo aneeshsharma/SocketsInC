@@ -10,7 +10,7 @@ int main()
 {
     int sock = 0, recv_len;
     struct sockaddr_in server_address;
-    char *message = "A message from client\0";
+    char message[256];
     char buffer[1024] = {0};
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -27,6 +27,9 @@ int main()
         printf("Invalid address\\Address not supported\n");
         return -1;
     }
+
+    printf("Enter message - ");
+    scanf("%[^\n]s", message);
 
     printf("Connecting...\n");
 
